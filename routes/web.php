@@ -3,6 +3,9 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AddNewsController;
 use App\Http\Controllers\NewsController;
+use App\Http\Controllers\Admin\NewsController as AdminNewsController;
+use App\Http\Controllers\Admin\CategoryController as AdminCategoryController;
+
 
 
 
@@ -30,13 +33,20 @@ Route::get('/about', function () {
 // })->name('news');
 
 Route::get('/news', [NewsController::class, 'index'])
-	->name('newsIndex');
+	->name('news.index');
 Route::get('/news/{id}', [NewsController::class, 'show'])
 	->where('id', '\d+')
-	->name('newsShow');
+	->name('news.show');
 
 Route::get('/addnews', function () {
-    return view('addnews');
+    return view('admin.news.addnews');
 })->name('addnews');
 
 Route::post('/addnews/submit', [AddNewsController::class, 'submit' ])->name('news-form');
+
+//admin
+Route::group(['prefix' => 'admin', 'as' => 'admin.'], function() {
+	Route::view('/', 'admin.index')->name('index');
+	Route::resource('/categories', AdminCategoryController::class);
+	Route::resource('/news', AdminNewsController::class);
+});
