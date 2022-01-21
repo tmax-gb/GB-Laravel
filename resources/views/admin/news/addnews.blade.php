@@ -14,21 +14,31 @@
 </div>
 @endif
 
-<form action="{{route('news-form')}}" method="post">
+<form method="post" action="{{ route('admin.news.store') }}">
     @csrf
     <div class="form-group">
-        <label for="name"></label>
-        <input class="form-control" type="text" name="name" placeholder="Введите название новости" id="name">
+        <label for="name">Наименование</label>
+        <input class="form-control" type="text" name="name" placeholder="Введите название новости" value="{{old('name')}}" id="name">
     </div>
 
     <div class="form-group">
-        <label for="desc"></label>
-        <input class="form-control" type="text" name="desc" placeholder="Введите краткое описание новости" id="desc">
+        <label for="author">Автор</label>
+        <input class="form-control" type="text" name="author" placeholder="Введите автора"  name="author" value="{{ old('author') }}" id="author">
     </div>
 
     <div class="form-group">
-        <label for="description"></label>
-        <textarea class="form-control" type="text" name="description" placeholder="Введите описание новости" id="description"></textarea>
+                <label for="status">Статус</label>
+                <select class="form-control" name="status" id="status">
+                    <option value disabled selected>Выберете статус</option>
+                    <option @if(old('status') === 'DRAFT') selected @endif>DRAFT</option>
+                    <option @if(old('status') === 'ACTIVE') selected @endif>ACTIVE</option>
+                    <option @if(old('status') === 'BLOCKED') selected @endif>BLOCKED</option>
+                </select>
+            </div>
+
+    <div class="form-group">
+        <label for="description">Описание</label>
+        <textarea class="form-control" name="description" id="description">{!! old('description') !!}</textarea>
     </div>
 
     <button type="submit" class="btn btn-success mt-5">Отправить</button>

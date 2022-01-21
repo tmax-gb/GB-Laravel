@@ -1,11 +1,10 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
-class NewsController extends Controller
+class OrderController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,7 +13,7 @@ class NewsController extends Controller
      */
     public function index()
     {
-        return view('admin.news.index');
+        return view('order');
     }
 
     /**
@@ -24,7 +23,7 @@ class NewsController extends Controller
      */
     public function create()
     {
-        return view('admin.news.addnews');
+        //
     }
 
     /**
@@ -35,11 +34,10 @@ class NewsController extends Controller
      */
     public function store(Request $request)
     {
-        $data = json_encode($request->all());
-		file_put_contents(public_path('news/news.json'), $data);
-        
-        return redirect()->route('admin.news.index');
-        // return response()->json($request->all());
+        $data = json_encode($request->except(['_token']));
+		file_put_contents(public_path('news/order.json'), $data);
+
+        return redirect()->route('home');
     }
 
     /**

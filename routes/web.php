@@ -3,6 +3,8 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AddNewsController;
 use App\Http\Controllers\NewsController;
+use App\Http\Controllers\FeedbackController;
+use App\Http\Controllers\OrderController;
 use App\Http\Controllers\Admin\NewsController as AdminNewsController;
 use App\Http\Controllers\Admin\CategoryController as AdminCategoryController;
 
@@ -28,21 +30,11 @@ Route::get('/about', function () {
     return view('about');
 })->name('about');
 
-// Route::get('/news', function () {
-//     return view('news');
-// })->name('news');
-
 Route::get('/news', [NewsController::class, 'index'])
 	->name('news.index');
 Route::get('/news/{id}', [NewsController::class, 'show'])
 	->where('id', '\d+')
 	->name('news.show');
-
-Route::get('/addnews', function () {
-    return view('admin.news.addnews');
-})->name('addnews');
-
-Route::post('/addnews/submit', [AddNewsController::class, 'submit' ])->name('news-form');
 
 //admin
 Route::group(['prefix' => 'admin', 'as' => 'admin.'], function() {
@@ -50,3 +42,7 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.'], function() {
 	Route::resource('/categories', AdminCategoryController::class);
 	Route::resource('/news', AdminNewsController::class);
 });
+
+Route::resource('/feedback', FeedbackController::class);
+
+Route::resource('/order', OrderController::class);

@@ -4,9 +4,11 @@
         <small class="d-block mb-3 text-muted">Все права защищены©</small>
       </div>
       <div class="col-6 col-md">
-        <h5>Features</h5>
+        <h5>Для пользователей</h5>
         <ul class="list-unstyled text-small">
-          <li class="mb-1"><a class="link-secondary text-decoration-none" href="#">Cool stuff</a></li>
+          <li class="mb-1"><a class="link-secondary text-decoration-none" href="{{ route('feedback.index') }}">Обратная связь</a></li>
+          <li class="mb-1"><a class="link-secondary text-decoration-none" href="{{ route('order.index') }}">Форма выгрузки данных</a></li>
+
         </ul>
       </div>
       <div class="col-6 col-md">

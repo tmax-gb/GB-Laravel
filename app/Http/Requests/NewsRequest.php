@@ -26,7 +26,7 @@ class NewsRequest extends FormRequest
         return [
             'name'=>'required',
             'description'=>'required|min:10|max:100',
-            'desc'=>'required|min:5|max:50',
+            'author'=>'required|max:50',
     
         ];
     }
