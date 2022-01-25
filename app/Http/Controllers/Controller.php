@@ -12,33 +12,33 @@ class Controller extends BaseController
 {
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
 
-	public function getNews(): array
-	{
-		$faker = Factory::create();
+	// public function getNews(): array
+	// {
+	// 	$faker = Factory::create();
 
-		$news = [];
+	// 	$news = [];
 
-		for($i = 0; $i < 10; $i++) {
-			$news[] = [
-				'id'    => $i,
-				'title' => $faker->jobTitle(),
-				'description' => $faker->text(250),
-				'author' => $faker->userName()
- 			];
-		}
+	// 	for($i = 0; $i < 10; $i++) {
+	// 		$news[] = [
+	// 			'id'    => $i,
+	// 			'title' => $faker->jobTitle(),
+	// 			'description' => $faker->text(250),
+	// 			'author' => $faker->userName()
+ 	// 		];
+	// 	}
 
-		return $news;
-	}
+	// 	return $news;
+	// }
 
-	public function getNewsById(int $id): array
-	{
-		$faker = Factory::create();
+	// public function getNewsById(int $id): array
+	// {
+	// 	$faker = Factory::create();
 
-		return [
-			'id'    => $id,
-			'title' => $faker->jobTitle(),
-			'description' => $faker->text(250),
-			'author' => $faker->userName()
-		];
-	}
+	// 	return [
+	// 		'id'    => $id,
+	// 		'title' => $faker->jobTitle(),
+	// 		'description' => $faker->text(250),
+	// 		'author' => $faker->userName()
+	// 	];
+	// }
 }
