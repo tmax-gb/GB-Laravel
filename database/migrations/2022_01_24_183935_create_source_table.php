@@ -13,7 +13,7 @@ class CreateSourceTable extends Migration
      */
     public function up()
     {
-        Schema::create('source', function (Blueprint $table) {
+        Schema::create('sources', function (Blueprint $table) {
             $table->id();
             $table->string('title', 255);
             $table->string('site', 255);
@@ -29,6 +29,6 @@ class CreateSourceTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('source');
+        Schema::dropIfExists('sources');
     }
 }

@@ -7,7 +7,9 @@ use App\Http\Controllers\FeedbackController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\Admin\NewsController as AdminNewsController;
 use App\Http\Controllers\Admin\CategoryController as AdminCategoryController;
-
+use App\Http\Controllers\Admin\SourceController as AdminSourceController;
+use App\Models\News;
+use App\Models\Category;
 
 
 
@@ -33,7 +35,7 @@ Route::get('/about', function () {
 Route::get('/newslist', [NewsController::class, 'index'])
 	->name('news.index');
 Route::get('/news/{id}', [NewsController::class, 'show'])
-	->where('id', '\d+')
+	->where('news', '\d+')
 	->name('news.show');
 
 //admin
@@ -41,6 +43,7 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.'], function() {
 	Route::view('/', 'admin.index')->name('index');
 	Route::resource('/categories', AdminCategoryController::class);
 	Route::resource('/news', AdminNewsController::class);
+	Route::resource('/sources', AdminSourceController::class);
 });
 
 Route::resource('/feedback', FeedbackController::class);

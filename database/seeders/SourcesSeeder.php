@@ -5,7 +5,7 @@ namespace Database\Seeders;
 use Illuminate\Database\Seeder;
 use Faker\Factory;
 
-class SourceSeeder extends Seeder
+class SourcesSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -14,7 +14,7 @@ class SourceSeeder extends Seeder
      */
     public function run()
     {
-        \DB::table('source')->insert($this->getData());
+        \DB::table('sources')->insert($this->getData());
     }
     
     private function getData(): array

@@ -4,10 +4,9 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\News;
-use App\Models\Category;
+use App\Models\Source;
 
-class NewsController extends Controller
+class SourceController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,10 +15,11 @@ class NewsController extends Controller
      */
     public function index()
     {
-        $news = News::query()->select(News::$availableFields)->get();
+        $source = Source::query()->select(Source::$availableFields)->get();
+
         
-        return view('admin.news.index', [
-			'newsList' => $news
+        return view('admin.sources.index', [
+			'sourceList' => $source
 		]);
     }
 
@@ -30,9 +30,9 @@ class NewsController extends Controller
      */
     public function create()
     {
-        $categories = Category::all();
-        return view('admin.news.addnews', [
-            'categories'=> $categories
+        $sources = Source::all();
+        return view('admin.sources.create',[
+            'sources'=> $sources
         ]);
     }
 
@@ -44,14 +44,12 @@ class NewsController extends Controller
      */
     public function store(Request $request)
     {
-        $created = News::create(
-            $request->only(['category_id','title','author','status','description']) + [
-                'slug' =>\Str::slug($request->input('title'))
-            ]
+        $created = Source::create(
+            $request->only(['title','site'])
         );
 
         if($created){
-            return redirect()->route('admin.news.index')
+            return redirect()->route('admin.sources.index')
             ->with('success', 'Запись успешно добавлена');
         }
 
@@ -62,10 +60,10 @@ class NewsController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  News  $news
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(News $news)
+    public function show($id)
     {
         //
     }
@@ -73,13 +71,13 @@ class NewsController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  News  $news
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(News $news)
+    public function edit(Source $source)
     {
-        return view('admin.news.edit', [
-			'news' => $news
+        return view('admin.sources.edit', [
+			'source' => $source
 		]);
     }
 
@@ -87,32 +85,28 @@ class NewsController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  News  $news
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, News $news)
+    public function update(Request $request, Source $source)
     {
-    
-        $updated = $news->fill($request->only(['category_id','title','author','status','description']) + [
-                'slug' =>\Str::slug($request->input('title'))
-            ])->save();
-        if($updated){
-            return redirect()->route('admin.news.index')
-            ->with('success', 'Запись успешно добавлена');
-        }
+        $updated = $source->fill($request->only(['title','site']))->save();
+    if($updated){
+        return redirect()->route('admin.sources.index')
+        ->with('success', 'Запись успешно добавлена');
+    }
 
-        return back()->with('error', 'Не удалось добавить запись') 
-        ->withInput();
-
+    return back()->with('error', 'Не удалось добавить запись') 
+    ->withInput();
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  News  $news
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(News $news)
+    public function destroy($id)
     {
         //
     }

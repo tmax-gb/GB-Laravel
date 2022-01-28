@@ -4,21 +4,21 @@
 
 @section('content')<h1>Добавление новостей</h1>
 
-@if($errors->any())
-<div class="alert alert-danger">
-    <ul>
-        @foreach($errors->all() as $error)
-        <li>{{$error}}</li>
-        @endforeach
-    </ul>
-</div>
-@endif
+@include('inc.message')
 
 <form method="post" action="{{ route('admin.news.store') }}">
     @csrf
     <div class="form-group">
-        <label for="name">Наименование</label>
-        <input class="form-control" type="text" name="name" placeholder="Введите название новости" value="{{old('name')}}" id="name">
+        <label for="category_id">Категория</label>
+        <select class="form-control" name="category_id" id="category_id">
+        @foreach($categories as $category)
+        <option value="{{$category->id}}">{{$category->title}}</option>
+        @endforeach
+        </select>
+    </div>
+    <div class="form-group">
+        <label for="title">Наименование</label>
+        <input class="form-control" type="text" name="title" placeholder="Введите название новости" value="{{old('title')}}" id="title">
     </div>
 
     <div class="form-group">

@@ -42,6 +42,7 @@
 	<h1>Новостей нет</h1>
 @endforelse
 </div>
+{{$newsList->links()}}
 @endsection
 
 

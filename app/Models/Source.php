@@ -5,16 +5,16 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Category extends Model
+class Source extends Model
 {
     use HasFactory;
 
-	public static $availableFields = ['id','title','description','created_at'];
+    public static $availableFields = ['id','title','site','created_at'];
 
-    protected $table = 'categories';
+    protected $table = 'sources';
 
 	protected $fillable = [
 		'title',
-		'description'
+		'site'
 	];
 }
