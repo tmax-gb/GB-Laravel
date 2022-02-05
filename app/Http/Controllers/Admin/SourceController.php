@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Source;
+use App\Http\Requests\Sources\CreateRequest;
+use App\Http\Requests\Sources\EditRequest;
 
 class SourceController extends Controller
 {
@@ -39,13 +41,13 @@ class SourceController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  CreateRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(CreateRequest $request)
     {
         $created = Source::create(
-            $request->only(['title','site'])
+            $request->validated()
         );
 
         if($created){
@@ -71,11 +73,12 @@ class SourceController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  Source $source
      * @return \Illuminate\Http\Response
      */
     public function edit(Source $source)
     {
+        $sources = Source::all();
         return view('admin.sources.edit', [
 			'source' => $source
 		]);
@@ -84,19 +87,19 @@ class SourceController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  EditRequest  $request
+     * @param  Source $source
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Source $source)
+    public function update(EditRequest $request, Source $source)
     {
-        $updated = $source->fill($request->only(['title','site']))->save();
+        $updated = $source->fill($request->validated())->save();
     if($updated){
         return redirect()->route('admin.sources.index')
-        ->with('success', 'Запись успешно добавлена');
+        ->with('success', 'Запись успешно изменена');
     }
 
-    return back()->with('error', 'Не удалось добавить запись') 
+    return back()->with('error', 'Не удалось изменить запись') 
     ->withInput();
     }
 

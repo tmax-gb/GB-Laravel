@@ -9,9 +9,9 @@
 
 </div>
 @endsection
-@include('inc.message')
 
 @section('content')
+@include('inc.message')
 <div>
     <form method="post" action="{{ route('admin.sources.update',['source' => $source] ) }}">
     @csrf

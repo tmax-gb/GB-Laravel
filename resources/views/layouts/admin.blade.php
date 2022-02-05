@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <title>@section('title') - GeekBrains @show</title>
-
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <!-- Bootstrap core CSS -->
     <link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet">
     <style>

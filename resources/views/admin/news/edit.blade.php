@@ -18,6 +18,15 @@
     @csrf
     @method('put')
     <div class="form-group">
+        <label for="category_id">Категория</label>
+        <select class="form-control" id="category_id" name="category_id">
+            @foreach($categories as $category)
+                <option value="{{ $category->id }}"
+                @if($category->id === $news->category_id) selected @endif>{{ $category->title }}</option>
+            @endforeach
+        </select>
+    </div>
+    <div class="form-group">
         <label for="title">Наименование</label>
         <input class="form-control" type="text" name="title" placeholder="Введите название новости" value="{{ $news->title }}" id="title">
     </div>
