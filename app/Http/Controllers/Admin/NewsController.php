@@ -79,7 +79,7 @@ class NewsController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function edit(News $news)
-    {
+    {   
         $categories = Category::all();
         return view('admin.news.edit', [
 			'news' => $news,

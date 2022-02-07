@@ -1,7 +1,23 @@
-@extends('layouts.main')
+@extends('layouts.app')
 
-@section('title-block')Главная страница@endsection
+@section('content')
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-header">{{ __('Dashboard') }}</div>
 
-@section('content')<h1>Главная страница</h1>
-<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequatur, quasi minus aspernatur perferendis deleniti necessitatibus maxime sunt fuga illo quia.</p>
+                <div class="card-body">
+                    @if (session('status'))
+                        <div class="alert alert-success" role="alert">
+                            {{ session('status') }}
+                        </div>
+                    @endif
+
+                    {{ __('You are logged in!') }}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 @endsection

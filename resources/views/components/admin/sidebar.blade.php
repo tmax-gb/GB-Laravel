@@ -25,6 +25,12 @@
                     Источники
                 </a>
             </li>
+            <li class="nav-item">
+                <a class="nav-link @if(request()->routeIs('admin.profiles.*')) active @endif" href="{{ route('admin.updateProfile') }}">
+                    <span data-feather="file"></span>
+                    Профили
+                </a>
+            </li>
         </ul>
 
     </div>
