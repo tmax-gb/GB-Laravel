@@ -61,6 +61,7 @@
                                     <a class="btn btn-link" href="{{ route('password.request') }}">
                                         {{ __('Забыли свой пароль?') }}
                                     </a>
+                                    <a href="{{ route('social.redirect', ['network' => 'vkontakte']) }}">Войти через VK</a><br>
                                 @endif
                             </div>
                         </div>
